@@ -1,0 +1,23 @@
+{
+  "name": "sdm-pla",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigograssia/sdm-pla.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigograssia/sdm-pla/issues"
+  },
+  "homepage": "https://github.com/rodrigograssia/sdm-pla#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
