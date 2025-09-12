@@ -8,6 +8,9 @@ const pedidos = [];
 app.post('/pedidos', (req,res) => {
     const pedido = req.body;
     console.log(`Pedido recebido para o usuário ID: ${pedido.userId}`);
+
+    pedidos.push(pedido);
+
     res.send({ message: 'Pedido criado com sucesso!', pedido });
 });
 

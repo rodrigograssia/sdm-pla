@@ -4,8 +4,12 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 
+const usuarios = [];
+
 app.post('/usuarios', async (req, res) => {
     const usuario = req.body;
+
+    usuarios.push(usuario);
 
     await axios.post('http://localhost:4000/pedidos', { userId: usuario.id });
 
@@ -13,7 +17,7 @@ app.post('/usuarios', async (req, res) => {
 });
 
 app.get('/usuarios', (req, res) => {
-    res.send({ message: 'Endpoint GET /usuarios funcionando!' });
+    res.send({ usuarios });
 });
 
 app.listen(3000, () => {
