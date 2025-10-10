@@ -17,11 +17,11 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const userSchema = new mongoose.Schema({
     name: { type: String, default: '' },
-    email: { type: String, required: true, uniruqe: true },
+    email: { type: String, required: true, unique: true },
     status: { type: Date, default: Date.now }
 });
 
-const User = mongoose.model('User',userSchema);
+const User = mongoose.model('User', userSchema);
 
 app.post('/usuarios', async (req, res) => {
     try {
@@ -33,7 +33,7 @@ app.post('/usuarios', async (req, res) => {
         const saved = await user.save();
 
         try {
-            await azios.post('http://localhost:4000/pedidos', { userId: saved._id, items: [], total: 0});
+            await axios.post('http://localhost:4000/pedidos', { userId: saved._id, items: [], total: 0 });
         } catch (err) {
             console.error('Erro ao criar pedido para o usuário: ', err)
         }
@@ -41,13 +41,22 @@ app.post('/usuarios', async (req, res) => {
         return res.status(201).json(saved);
     } catch (err) {
         console.error(err)
-        if (err.code === 11000) return res.status(400).json
-        ({error: 'Email já cadastrado'});
+        if (err.code === 11000) return res.status(400).json({ error: 'Email já cadastrado' });
 
-    return res.status(500).json({error: 'Erro ao criar usuário'})
+        return res.status(500).json({ error: 'Erro ao criar usuário' })
+    }
+});
+
+app.get('/usuarios', async (req, res) => {
+    try {
+        const users = await User.find().sort({ createdAt: -1 });
+        return res.json(users);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Erro ao buscar usuários' });
     }
 });
 
 app.listen(3000, () => {
-    console.log('Order service running on http://localhost:3000');
+    console.log('User service running on http://localhost:3000');
 });

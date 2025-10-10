@@ -40,16 +40,16 @@ app.post('/pedidos', async (req, res) => {
     }
 });
 
-app.get('pedidos', async(req, res) => {
+app.get('/pedidos', async (req, res) => {
     try {
-        const orders = await Order.find().sort({createdAt: -1});
-        return res.json(orders)
+        const orders = await Order.find().sort({ createdAt: -1 });
+        return res.json(orders);
     } catch (err) {
-        console.error(err)
-        return res.status(500).json({error: 'Erro ao buscar pedidos'})
+        console.error(err);
+        return res.status(500).json({ error: 'Erro ao buscar pedidos' });
     }
 });
 
-app.listen(3001, () => {
+app.listen(4000, () => {
     console.log('Order service running on http://localhost:4000');
 });
