@@ -1,4 +1,3 @@
-/*
 // declarativa 
 function exibirIdade(idade) {
     return `A idade é: ${idade}`
@@ -20,7 +19,6 @@ function exibir (){
     console.log(`Sua idade é ${exibirIdade(20)}. Sua altura é ${altura(30)}M. Seu curso é ${descobrirCurso("ADS")}`)
 }
 exibir(exibirIdade, altura, descobrirCurso)
-*/
 
 // Função Declarativa
 function saudacao(nome) {
