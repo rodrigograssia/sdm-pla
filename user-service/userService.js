@@ -57,6 +57,16 @@ app.get('/usuarios', async (req, res) => {
     }
 });
 
+app.get('/usuarios/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) return res.status(404).json({error: 'Usuário não encontrado'});
+        res.json(user)
+    } catch (err) {
+        res.status(400).json({error: 'Id inválido'})
+    }
+    });
+
 app.listen(3000, () => {
     console.log('User service running on http://localhost:3000');
 });
